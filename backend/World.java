@@ -54,6 +54,7 @@ public class World
 
         int vw = Global.VIEW_WIDTH,
             vh = Global.VIEW_HEIGHT,
+            vp = Global.VIEW_PADDING,
             ww = Global.WORLD_WIDTH,
             wh = Global.WORLD_HEIGHT;
 
@@ -83,9 +84,7 @@ public class World
         boolean canMove = player.canMove(adjacentTile);
 
         if(canMove)
-        {
             player.move(dir);
-        }
 
         return canMove;
     }

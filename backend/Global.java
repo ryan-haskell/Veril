@@ -3,13 +3,15 @@ package backend;
 /**
  * Created by ryan on 9/24/15.
  */
-public class Global {
+public class Global
+{
     //  GAME
     public static final String GAME_TITLE = "Veril";
 
     //  VIEW
     public static final int VIEW_WIDTH = 16,
-            VIEW_HEIGHT = 9;
+                            VIEW_HEIGHT = 9,
+                            VIEW_PADDING = 1;
 
     //  WORLD
     public static final int WORLD_WIDTH = 25,
@@ -17,7 +19,7 @@ public class Global {
 
     //  TILE
     public static final int TILE_WIDTH = 50,
-            TILE_HEIGHT = TILE_WIDTH;
+                            TILE_HEIGHT = TILE_WIDTH;
 
     //  PLAYER
     public static final int PLAYER_INIT_X = (VIEW_WIDTH / 2)%WORLD_WIDTH,
@@ -33,10 +35,5 @@ public class Global {
 
     public static final int NUM_DIRS = Direction.values().length;
 
-    //  HELPERS
-    public static void debug(String str)
-    {
-        System.out.println("DEBUG: " + str);
-    }
 
 }

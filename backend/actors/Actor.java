@@ -16,10 +16,12 @@ public class Actor
 
     private int x, y;
     private MoveType moveType;
+    private Global.Direction dir;
 
     public Actor(int x, int y)
     {
         this.setLocation(x,y);
+        this.dir = Global.Direction.DOWN;
         this.moveType = MoveType.LAND;
     }
 
@@ -52,7 +54,7 @@ public class Actor
 
     public String getImage()
     {
-        return "images/actors/veril.png";
+        return "images/actors/veril/"+dir.name().toLowerCase()+".png";
     }
 
     public boolean canMove(Tile adjacentTile)
@@ -85,5 +87,7 @@ public class Actor
                 x = (x - 1 + Global.WORLD_WIDTH) % Global.WORLD_WIDTH;
                 break;
         }
+
+        this.dir = dir;
     }
 }
