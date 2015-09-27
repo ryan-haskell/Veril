@@ -24,13 +24,13 @@ public class Frame extends JFrame implements Display, ActionListener
     private static final int    SCREEN_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width,
                                 SCREEN_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height,
 
-                                FRAME_WIDTH = Global.TILE_WIDTH*Global.VIEW_WIDTH,
-                                FRAME_HEIGHT = Global.TILE_HEIGHT*Global.VIEW_HEIGHT,
+                                FRAME_WIDTH = Global.TILE_SIZE*Global.VIEW_WIDTH,
+                                FRAME_HEIGHT = Global.TILE_SIZE*Global.VIEW_HEIGHT,
                                 FRAME_X = (SCREEN_WIDTH - FRAME_WIDTH)/2,
                                 FRAME_Y = (SCREEN_HEIGHT - FRAME_HEIGHT)/2,
 
-                                CANVAS_WIDTH = Global.TILE_WIDTH*(Global.VIEW_WIDTH + (2*Global.VIEW_PADDING)),
-                                CANVAS_HEIGHT = Global.TILE_HEIGHT*(Global.VIEW_HEIGHT + (2*Global.VIEW_PADDING));
+                                CANVAS_WIDTH = Global.TILE_SIZE*(Global.VIEW_WIDTH + (2*Global.VIEW_PADDING)),
+                                CANVAS_HEIGHT = Global.TILE_SIZE*(Global.VIEW_HEIGHT + (2*Global.VIEW_PADDING));
 
     //  Drawing
     private BufferedImage canvas, player;
@@ -77,17 +77,17 @@ public class Frame extends JFrame implements Display, ActionListener
 
     private void initPlayerImage()
     {
-        player = new BufferedImage(Global.TILE_WIDTH, Global.TILE_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+        player = new BufferedImage(Global.TILE_SIZE, Global.TILE_SIZE, BufferedImage.TYPE_INT_ARGB);
         playerGraphics = player.getGraphics();
     }
 
     public void paint(Graphics g)
     {
-        int canvasX = -Global.VIEW_PADDING * Global.TILE_WIDTH;
-        int canvasY = -Global.VIEW_PADDING * Global.TILE_HEIGHT;
+        int canvasX = -Global.VIEW_PADDING * Global.TILE_SIZE;
+        int canvasY = -Global.VIEW_PADDING * Global.TILE_SIZE;
 
-        int playerX = (Global.VIEW_WIDTH/2)*Global.TILE_WIDTH;
-        int playerY = (Global.VIEW_HEIGHT/2)*Global.TILE_HEIGHT;
+        int playerX = (Global.VIEW_WIDTH/2)*Global.TILE_SIZE;
+        int playerY = (Global.VIEW_HEIGHT/2)*Global.TILE_SIZE;
 
         BufferedImage buffer = new BufferedImage(FRAME_WIDTH, FRAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
         Graphics bufferGraphics = buffer.getGraphics();
@@ -106,7 +106,7 @@ public class Frame extends JFrame implements Display, ActionListener
         }
         catch (IOException e) {
             e.printStackTrace();
-            image = new BufferedImage(Global.TILE_WIDTH, Global.TILE_HEIGHT, BufferedImage.TYPE_INT_RGB);
+            image = new BufferedImage(Global.TILE_SIZE, Global.TILE_SIZE, BufferedImage.TYPE_INT_RGB);
         }
         return image;
     }
@@ -126,8 +126,8 @@ public class Frame extends JFrame implements Display, ActionListener
 
                 canvasGraphics.drawImage(
                         this.getImage(playerScreen[y][x].getImage()),
-                        x * Global.TILE_WIDTH,
-                        y * Global.TILE_HEIGHT,
+                        x * Global.TILE_SIZE,
+                        y * Global.TILE_SIZE,
                         null
                 );
             }
@@ -153,16 +153,16 @@ public class Frame extends JFrame implements Display, ActionListener
         switch(slideDirection)
         {
             case UP:
-                canvasOffsetY = (int)(Global.TILE_HEIGHT * (numSlides/NUM_FRAMES));
+                canvasOffsetY = (int)(Global.TILE_SIZE * (numSlides/NUM_FRAMES));
                 break;
             case DOWN:
-                canvasOffsetY = (int)(-Global.TILE_HEIGHT * (numSlides/NUM_FRAMES));
+                canvasOffsetY = (int)(-Global.TILE_SIZE * (numSlides/NUM_FRAMES));
                 break;
             case LEFT:
-                canvasOffsetX = (int)(Global.TILE_WIDTH * (numSlides/NUM_FRAMES));
+                canvasOffsetX = (int)(Global.TILE_SIZE * (numSlides/NUM_FRAMES));
                 break;
             case RIGHT:
-                canvasOffsetX = (int)(-Global.TILE_WIDTH * (numSlides/NUM_FRAMES));
+                canvasOffsetX = (int)(-Global.TILE_SIZE * (numSlides/NUM_FRAMES));
                 break;
         }
 

@@ -19,8 +19,7 @@ public class Global
                             WORLD_HEIGHT = 9;
 
     //  TILE
-    public static final int TILE_WIDTH = 50,
-                            TILE_HEIGHT = 50;
+    public static final int TILE_SIZE = 50;
 
     //  PLAYER
     public static final int PLAYER_INIT_X = (VIEW_WIDTH / 2)%WORLD_WIDTH,
