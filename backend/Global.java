@@ -1,6 +1,7 @@
 package backend;
 
 /**
+ * Global - holds all the shared variables and functions
  * Created by ryan on 9/24/15.
  */
 public class Global
@@ -14,12 +15,12 @@ public class Global
                             VIEW_PADDING = 1;
 
     //  WORLD
-    public static final int WORLD_WIDTH = 25,
-                            WORLD_HEIGHT = 25;
+    public static final int WORLD_WIDTH = 16,
+                            WORLD_HEIGHT = 9;
 
     //  TILE
     public static final int TILE_WIDTH = 50,
-                            TILE_HEIGHT = TILE_WIDTH;
+                            TILE_HEIGHT = 50;
 
     //  PLAYER
     public static final int PLAYER_INIT_X = (VIEW_WIDTH / 2)%WORLD_WIDTH,

@@ -3,6 +3,7 @@ package backend;
 import backend.actors.Player;
 
 /**
+ * World - contains all data about the world: tiles, actors, you name it.
  * Created by ryan on 9/24/15.
  */
 public class World
@@ -58,13 +59,16 @@ public class World
             ww = Global.WORLD_WIDTH,
             wh = Global.WORLD_HEIGHT;
 
-        Tile[][] viewableTiles = new Tile[vh][vw];
+        int rows = vh + (2*vp);
+        int cols = vw + (2*vp);
 
-        for(int y = 0; y < vh; y++)
-            for(int x = 0; x < vw; x++)
+        Tile[][] viewableTiles = new Tile[rows][cols];
+
+        for(int y = 0; y < rows; y++)
+            for(int x = 0; x < cols; x++)
             {
-                int ty = (py - (vh/2)%wh + y + wh)%wh;
-                int tx = (px - (vw/2)%ww + x + ww)%ww;
+                int ty = (py - (vh/2)%wh + y + wh - vp)%wh;
+                int tx = (px - (vw/2)%ww + x + ww - vp)%ww;
 
                 viewableTiles[y][x] = tiles[ty][tx];
             }

@@ -5,6 +5,7 @@ import backend.Game;
 import backend.interfaces.Input;
 
 /**
+ * Veril - Launches the game with the main method.
  * Created by ryan on 9/24/15.
  */
 public class Veril
@@ -13,6 +14,6 @@ public class Veril
     {
         Input input = new Keyboard();
         Display display = new Frame((Keyboard)input);
-        Game game = new Game(display, input);
+        new Game(display, input);
     }
 }
