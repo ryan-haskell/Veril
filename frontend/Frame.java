@@ -123,7 +123,6 @@ public class Frame extends JFrame implements Display, ActionListener
         for(int y = 0; y < rows; y++)
             for(int x = 0; x < cols; x++)
             {
-
                 canvasGraphics.drawImage(
                         this.getImage(playerScreen[y][x].getImage()),
                         x * Global.TILE_SIZE,
