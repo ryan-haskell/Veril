@@ -60,6 +60,6 @@ public class Tile
 
     public String getImage()
     {
-        return "images/tiles/" + type.ordinal() + ".png";
+        return Global.IMG_DIR + "bg/" + type.name().toLowerCase() + ".png";
     }
 }

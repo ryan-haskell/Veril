@@ -8,15 +8,15 @@ import backend.Tile;
  */
 public class Actor
 {
-    private enum MoveType{
+    protected enum MoveType{
         LAND,
         SEA,
         AIR
     }
 
-    private int x, y;
-    private MoveType moveType;
-    private Global.Direction dir;
+    protected int x, y;
+    protected MoveType moveType;
+    protected Global.Direction dir;
 
     public Actor(int x, int y)
     {
@@ -50,11 +50,6 @@ public class Actor
     public void setY(int y)
     {
         this.y = y;
-    }
-
-    public String getImage()
-    {
-        return "images/actors/veril/"+dir.name().toLowerCase()+".png";
     }
 
     public boolean canMove(Tile adjacentTile)

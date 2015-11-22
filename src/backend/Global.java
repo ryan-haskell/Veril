@@ -34,6 +34,9 @@ public class Global
     }
 
     public static final int NUM_DIRS = Direction.values().length;
+    
+    //	IMAGES
+    public static final String IMG_DIR = "img/";
 
 
 }
