@@ -1,108 +1,102 @@
 package frontend;
 
-import backend.Game;
-import backend.interfaces.Input;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-/**
- * Keyboard - Implements Input interface with the keyboard.
- * Created by ryan on 9/24/15.
- */
+import backend.Game;
+import backend.Global;
+import backend.interfaces.Input.*;
+import backend.Global.Direction;
+import backend.interfaces.Input;
+
 public class Keyboard implements KeyListener, Input
 {
-    private Game game;
-    private boolean inputEnabled;
+	private boolean[]	moveCommands, devCommands;
 
-    //  Keeps track of key states
-    private Game.Command nextCommand;
+	public Keyboard()
+	{
+		resetCommands();
+	}
+	
+	@Override
+	public void keyPressed(KeyEvent event) 
+	{
+		setCommand(event, true);		
+	}
 
-    public Keyboard()
-    {
-        disableInput();
-    }
-
-    public void keyTyped(KeyEvent keyEvent){}
-
-    public void keyPressed(KeyEvent keyEvent)
-    {
-        Game.Command command = getCommand(keyEvent);
-
-        if(command == null)
-        {
-            enableInput();
-        }
-        else
-        {
-            if(!inputEnabled)
-            {
-                if(command != nextCommand)
-                    nextCommand = command;
-            }
-            else
-            {
-                disableInput();
-                game.userInput(command);
-            }
-
-        }
-
-    }
-
-    public void keyReleased(KeyEvent keyEvent)
-    {
-        Game.Command command = getCommand(keyEvent);
-
-        if(command != null)
-        {
-            if (command == nextCommand)
-            {
-                nextCommand = null;
-            }
-        }
-    }
-
-    private Game.Command getCommand(KeyEvent keyEvent)
+	@Override
+	public void keyReleased(KeyEvent event) 
+	{
+		setCommand(event, false);
+	}
+	
+	private void setCommand(KeyEvent event, boolean value)
+	{
+		Direction moveCommand = getMoveCommand(event);
+		DevCommand devCommand = getDevCommand(event);
+		
+		if(moveCommand != null)
+			moveCommands[moveCommand.ordinal()] = value;
+		else if(devCommand != null)
+			devCommands[devCommand.ordinal()] = value;
+	}
+	
+    private Direction getMoveCommand(KeyEvent keyEvent)
     {
         switch(keyEvent.getKeyCode())
         {
             case KeyEvent.VK_UP:
-                return (Game.Command.MOVE_UP);
-            case KeyEvent.VK_RIGHT:
-                return (Game.Command.MOVE_RIGHT);
-            case KeyEvent.VK_DOWN:
-                return (Game.Command.MOVE_DOWN);
+            case KeyEvent.VK_W:
+                return (Direction.UP);
             case KeyEvent.VK_LEFT:
-                return (Game.Command.MOVE_LEFT);
-            case KeyEvent.VK_R:
-                return (Game.Command.RANDOMIZE);
+            case KeyEvent.VK_A:
+                return (Direction.LEFT);
+            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_D:
+                return (Direction.RIGHT);
+            case KeyEvent.VK_DOWN:
+            case KeyEvent.VK_S:
+                return (Direction.DOWN);
             case KeyEvent.VK_ESCAPE:
                 System.exit(0);
         }
 
         return null;
     }
-
-    //  Input implementation
-    public void setGame(Game game)
+    
+    private DevCommand getDevCommand(KeyEvent keyEvent)
     {
-        this.game = game;
-        enableInput();
+    	switch(keyEvent.getKeyCode())
+    	{
+	        case KeyEvent.VK_R:
+	            return (DevCommand.RANDOMIZE);
+    	}
+    	
+    	return null;
     }
+	
+	@Override
+	public void keyTyped(KeyEvent event){}
+	
+	private void resetCommands()
+	{
+		this.moveCommands = new boolean[Direction.values().length];
+		for(int i = 0; i < moveCommands.length; i++)
+			moveCommands[i] = false;
+		
+		this.devCommands = new boolean[DevCommand.values().length];
+		for(int i = 0; i < devCommands.length; i++)
+			devCommands[i] = false;
+	}
 
-    public void enableInput()
-    {
-        this.inputEnabled = true;
-    }
+	@Override
+	public boolean[] getMoveCommands() {
+		return moveCommands;
+	}
 
-    public void disableInput()
-    {
-        this.inputEnabled = false;
-    }
+	@Override
+	public boolean[] getDevCommands() {
+		return devCommands;
+	}
 
-    public Game.Command getNextCommand()
-    {
-        return nextCommand;
-    }
 }
